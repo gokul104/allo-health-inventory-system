@@ -17,13 +17,18 @@ export default function Home() {
 
   const fetchProducts = async () => {
 
-    const res = await fetch(
-      "http://localhost:3000/api/products"
-    );
+    try {
 
-    const data = await res.json();
+      const res = await fetch("/api/products");
 
-    setProducts(data);
+      const data = await res.json();
+
+      setProducts(data);
+
+    } catch (error) {
+
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -34,35 +39,44 @@ export default function Home() {
     inventoryId: string
   ) => {
 
-    const res = await fetch(
-      "http://localhost:3000/api/reservations",
-      {
-        method: "POST",
+    try {
 
-        headers: {
-          "Content-Type": "application/json",
-        },
+      const res = await fetch(
+        "/api/reservations",
+        {
+          method: "POST",
 
-        body: JSON.stringify({
-          inventoryId,
-          quantity: 1,
-        }),
-      }
-    );
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-    const data = await res.json();
-
-    if (res.ok) {
-
-      alert(
-        "Reservation Created Successfully"
+          body: JSON.stringify({
+            inventoryId,
+            quantity: 1,
+          }),
+        }
       );
 
-      fetchProducts();
+      const data = await res.json();
 
-    } else {
+      if (res.ok) {
 
-      alert(data.message);
+        alert(
+          "Reservation Created Successfully"
+        );
+
+        fetchProducts();
+
+      } else {
+
+        alert(data.message);
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert("Something went wrong");
     }
   };
 
@@ -88,27 +102,19 @@ export default function Home() {
             </h2>
 
             <p className="mb-2">
-              Warehouse:
-              {" "}
-              {item.warehouse}
+              Warehouse: {item.warehouse}
             </p>
 
             <p className="mb-2">
-              Total Stock:
-              {" "}
-              {item.totalStock}
+              Total Stock: {item.totalStock}
             </p>
 
             <p className="mb-2">
-              Reserved Stock:
-              {" "}
-              {item.reservedStock}
+              Reserved Stock: {item.reservedStock}
             </p>
 
             <p className="mb-4 text-green-400">
-              Available Stock:
-              {" "}
-              {item.availableStock}
+              Available Stock: {item.availableStock}
             </p>
 
             <button
