@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Inventory Reservation System
 
-## Getting Started
+A full-stack inventory reservation system built using Next.js, Prisma, PostgreSQL, and Neon DB.
 
-First, run the development server:
+The system prevents overselling during concurrent reservations using PostgreSQL transactions with Serializable isolation level.
+
+---
+
+# Features
+
+- Product inventory listing
+- Warehouse-based stock tracking
+- Reservation workflow
+- Reservation confirmation
+- Reservation release/cancellation
+- Overselling prevention
+- Transaction-safe inventory updates
+- Live deployed frontend + backend
+
+---
+
+# Tech Stack
+
+- Next.js
+- TypeScript
+- Prisma ORM
+- PostgreSQL (Neon)
+- Tailwind CSS
+- Vercel Deployment
+
+---
+
+# Live Demo
+
+https://allo-health-inventory-system-bice.vercel.app
+
+---
+
+# GitHub Repository
+
+https://github.com/gokul104/allo-health-inventory-system
+
+---
+
+# API Endpoints
+
+## GET /api/products
+
+Returns products with warehouse stock availability.
+
+---
+
+## POST /api/reservations
+
+Creates inventory reservation.
+
+Returns 409 if stock unavailable.
+
+---
+
+## POST /api/reservations/confirm
+
+Confirms reservation after payment success.
+
+---
+
+## POST /api/reservations/release
+
+Releases reservation and restores stock.
+
+---
+
+# Local Setup
+
+## Install dependencies
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+npm install
